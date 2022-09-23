@@ -2,6 +2,7 @@ package com.ll.exam.app_2022_09_23;
 
 import com.ll.exam.app_2022_09_23.app.article.dto.Article;
 import com.ll.exam.app_2022_09_23.app.article.service.ArticleService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -26,6 +29,8 @@ class AppTest {
     @Test
     @DisplayName("게시물 작성")
     void t2() {
-        articleService.write("제목3", "내용3");
+        long id = articleService.write("제목3", "내용3");
+
+        assertThat(id).isGreaterThan(0);
     }
 }
